@@ -1,56 +1,72 @@
-# Welcome to your Expo app 👋
+# 🏺 Artesanías Express - Gestión de Pedidos Móvil
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Aplicación móvil de tipo *offline-first* desarrollada para la gestión integral de pedidos de productos artesanales. Diseñada para funcionar sin conexión a internet mediante bases de datos locales, con capacidad de sincronización inteligente hacia la nube.
 
-## Get started
+Este proyecto ha sido desarrollado como entregable final para el módulo de Desarrollo de Aplicaciones Móviles.
 
-1. Install dependencies
+## 🚀 Características Principales
 
+- **Autenticación Segura:** Registro, inicio y cierre de sesión de vendedores mediante Firebase Authentication. Rutas protegidas mediante Expo Router.
+- **Arquitectura Offline-First:** Persistencia de datos permanente usando SQLite. Las operaciones (Crear, Leer, Actualizar, Eliminar) se guardan localmente en el dispositivo.
+- **Sincronización en la Nube:** Integración con Firebase Firestore. Algoritmo inteligente que evalúa registros para realizar `addDoc`, `updateDoc` o `deleteDoc` según corresponda, evitando duplicidad de información.
+- **Catálogo Dinámico (API REST):** Consumo asíncrono de un catálogo de productos realistas alojado en MockAPI, renderizando imágenes, nombres y precios con manejo de estados de carga (Loader).
+- **Diseño UI/UX Premium:** Interfaces modernas, limpias y responsivas desarrolladas con NativeWind (Tailwind CSS v3.4), incluyendo validaciones de formularios, alertas interactivas y avatares de usuario.
+
+## 🛠️ Tecnologías y Herramientas
+
+- **Framework:** React Native / Expo (SDK 57)
+- **Navegación:** Expo Router (File-based routing)
+- **Estilos:** NativeWind (Tailwind CSS)
+- **Base de Datos Local:** Expo SQLite
+- **Backend as a Service (BaaS):** Firebase (Auth & Firestore)
+- **API Externa:** MockAPI.io
+- **Compilación Nativa:** EAS Build (Generación de APK)
+
+## ⚙️ Requisitos Previos
+
+- [Node.js](https://nodejs.org/) (v18 o superior)
+- Git
+- Aplicación **Expo Go** instalada en tu dispositivo físico, o un Emulador de Android configurado.
+
+## 📥 Instalación y Ejecución
+
+1. **Clonar el repositorio:**
    ```bash
-   npm install
-   ```
+   git clone [https://github.com/TU_USUARIO/mi-proyecto-artesanias.git](https://github.com/TU_USUARIO/mi-proyecto-artesanias.git)
+   cd mi-proyecto-artesanias
 
-2. Start the app
-
+2. **Instalar las dependencias:**
    ```bash
-   npx expo start
-   ```
+    npm install
 
-In the output, you'll find options to open the app in a
+3. **Configurar las credenciales (Opcional si deseas usar tu propia BD):**
+      
+      Abre el archivo src/infrastructure/firebase.js y asegúrate de que el objeto firebaseConfig tenga las credenciales válidas de un proyecto activo de Firebase.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+4. **Ejecutar en entorno de desarrollo:**
+   ```bash
+    npx expo start -c
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+Nota: Presiona la tecla a en la terminal para abrir en el emulador de Android, o escanea el código QR con Expo Go desde tu celular.
 
-## Get a fresh project
+## 📋 Guía de Pruebas (Evaluación de la Rúbrica)
+Para comprobar el correcto funcionamiento de todos los requerimientos, sigue este flujo:
 
-When you're ready, run:
+Prueba de Autenticación: Al iniciar la app, serás dirigido al Login. Usa el enlace inferior para ir al Registro. Crea una cuenta (ej. vendedor@artesanias.com / 123456). Inicia sesión.
 
-```bash
-npm run reset-project
-```
+Prueba API REST: Presiona "Nuevo Pedido". Verás un loader mientras el catálogo se descarga desde MockAPI. Las tarjetas mostrarán fotografías en alta definición y precios de artesanías.
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Prueba SQLite (CRUD Local): Selecciona un producto, ingresa la cantidad del cliente y guarda el pedido. Aparecerá en tu pantalla principal con la etiqueta "⏳ Local". Toca el pedido para entrar al Detalle, cambia su estado a "En Proceso" y guarda. Todo esto ocurre sin necesidad de internet. Si cierras la app y la vuelves a abrir, el pedido seguirá ahí.
 
-### Other setup steps
+Prueba de Firestore (Nube): En el panel principal, presiona el botón "Sincronizar ☁️". El sistema se conectará a Firebase y la etiqueta del pedido cambiará a "✓ En Nube". Si editas el pedido nuevamente y vuelves a sincronizar, la app enviará una orden de actualización sin duplicar el registro en la base de datos de Firestore.
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+📦 Generación de APK
+El proyecto está configurado para la compilación en la nube mediante Expo Application Services (EAS). El ejecutable .apk para Android se generó utilizando el siguiente comando:
 
-## Learn more
+eas build -p android --profile preview
 
-To learn more about developing your project with Expo, look at the following resources:
+Autor: Jeysson Fernando Perez Rafael
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+Programa: Desarrollo de Sistemas Front-End y Back-End (IDAT)
 
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Ubicación: Huaraz, Perú - 2026
