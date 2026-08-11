@@ -32,7 +32,7 @@ Este proyecto ha sido desarrollado como entregable final para el módulo de Desa
 
 1. **Clonar el repositorio:**
    ```bash
-   git clone [https://github.com/TU_USUARIO/mi-proyecto-artesanias.git](https://github.com/TU_USUARIO/mi-proyecto-artesanias.git)
+   git clone [https://github.com/Jeysson0102/mi-proyecto-artesanias.git]
    cd mi-proyecto-artesanias
 
 2. **Instalar las dependencias:**
